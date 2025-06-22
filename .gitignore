@@ -1,0 +1,28 @@
+# Node
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# TypeScript
+/dist/
+*.tsbuildinfo
+
+# Env
+.env
+.env.*
+
+# Docker
+*.local
+Dockerfile*
+docker-compose*
+
+# VSCode
+.vscode/
+
+# Jest
+coverage/
+
+# Outros
+.idea/
+.DS_Store 
