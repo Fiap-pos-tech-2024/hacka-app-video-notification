@@ -17,8 +17,17 @@ const router = Router();
  *             properties:
  *               to:
  *                 type: string
+ *                 description: Endereço de e-mail do destinatário
  *               message:
  *                 type: string
+ *                 description: Mensagem do e-mail
+ *               file:
+ *                 type: string
+ *                 description: Nome do arquivo (obrigatório)
+ *             required:
+ *               - to
+ *               - message
+ *               - file
  *     responses:
  *       200:
  *         description: E-mail de sucesso enviado
@@ -41,8 +50,17 @@ router.post('/notify/success', sendSuccessNotification);
  *             properties:
  *               to:
  *                 type: string
+ *                 description: Endereço de e-mail do destinatário
  *               message:
  *                 type: string
+ *                 description: Mensagem do e-mail
+ *               file:
+ *                 type: string
+ *                 description: Nome do arquivo (obrigatório)
+ *             required:
+ *               - to
+ *               - message
+ *               - file
  *     responses:
  *       200:
  *         description: E-mail de erro enviado

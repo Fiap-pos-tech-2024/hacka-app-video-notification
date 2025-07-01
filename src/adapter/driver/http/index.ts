@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import express from 'express';
 import notificationRoutes from './routes/notification.route';
 import swaggerUi from 'swagger-ui-express';
@@ -10,4 +11,5 @@ app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.listen(3000, () => {
   console.log('Notification service running on port 3000');
+  console.log('Documentation: http://localhost:3000/docs');
 }); 
