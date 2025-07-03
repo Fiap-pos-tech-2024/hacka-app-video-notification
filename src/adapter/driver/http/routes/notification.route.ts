@@ -69,4 +69,30 @@ router.post('/notify/success', sendSuccessNotification);
  */
 router.post('/notify/error', sendErrorNotification);
 
-export default router; 
+/**
+ * @swagger
+ * /api/notifications/health:
+ *   get:
+ *     summary: Health check do serviço
+ *     responses:
+ *       200:
+ *         description: Serviço funcionando
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                 timestamp:
+ *                   type: string
+ */
+router.get('/notifications/health', (req, res) => {
+  res.json({
+    status: 'healthy',
+    service: 'notification-service',
+    timestamp: new Date().toISOString()
+  });
+});
+
+export default router;

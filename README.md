@@ -51,7 +51,7 @@ npm run test:mutations
 
 `POST /api/notify/error` — Envia notificação de erro por e-mail
 
-A documentação completa dos endpoints está disponível via Swagger em `/docs`.
+A documentação completa dos endpoints está disponível via Swagger em `/notification-docs`.
 
 ## 🛠️ Comandos
 
@@ -82,7 +82,7 @@ cp .env.example .env
 docker-compose up --build
 ```
 
-A aplicação estará disponível em 🌐 [http://localhost:3000/docs](http://localhost:3000/docs)
+A aplicação estará disponível em 🌐 [http://localhost:3001/api/docs](http://localhost:3001/api/docs)
 
 ### 🛑 Parando os serviços
 

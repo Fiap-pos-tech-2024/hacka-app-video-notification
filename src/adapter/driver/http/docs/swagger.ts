@@ -8,7 +8,8 @@ const options = {
       version: '1.0.0',
     },
   },
-  apis: ['./src/adapter/driver/http/routes/*.ts'],
+  // Em produção, apontar para código compilado em dist
+  apis: ['./dist/adapter/driver/http/routes/*.js'],
 };
 
-export const swaggerSpec = swaggerJSDoc(options); 
+export const swaggerSpec = swaggerJSDoc(options);
