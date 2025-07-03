@@ -8,4 +8,12 @@ module.exports = {
   },
   testMatch: ['**/?(*.)+(spec|test).[tj]s?(x)'],
   collectCoverageFrom: ['src/**/*.{ts,js}'],
+  coverageDirectory: 'coverage',
+  coverageReporters: ['text', 'lcov', 'html'],
+  coveragePathIgnorePatterns: [
+    '/node_modules/',
+    '/dist/',
+    '/coverage/',
+    '\\.d\\.ts$'
+  ],
 }; 
