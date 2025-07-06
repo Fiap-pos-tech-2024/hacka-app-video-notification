@@ -14,8 +14,7 @@ yarn-error.log
 
 # Docker
 *.local
-Dockerfile*
-docker-compose*
+
 
 # VSCode
 .vscode/
