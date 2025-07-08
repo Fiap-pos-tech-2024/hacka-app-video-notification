@@ -1,8 +1,14 @@
 import { Router } from 'express'
 import { sendSuccessNotification, sendErrorNotification } from '../presenters/notification.presenter'
 import { authMiddleware } from '../middlewares/authMiddleware'
-
 const router = Router()
+
+/**
+ * @swagger
+ * tags:
+ *   name: Notificações
+ *   description: Endpoints de envio de notificações
+ */
 
 /**
  * @swagger
