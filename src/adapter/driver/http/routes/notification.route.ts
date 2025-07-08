@@ -1,13 +1,24 @@
-import { Router } from 'express';
-import { sendSuccessNotification, sendErrorNotification } from '../presenters/notification.presenter';
+import { Router } from 'express'
+import { sendSuccessNotification, sendErrorNotification } from '../presenters/notification.presenter'
+import { authMiddleware } from '../middlewares/authMiddleware'
+const router = Router()
 
-const router = Router();
+/**
+ * @swagger
+ * tags:
+ *   name: Notificações
+ *   description: Endpoints de envio de notificações
+ */
 
 /**
  * @swagger
  * /api/notify/success:
  *   post:
  *     summary: Envia notificação de sucesso por e-mail
+ *     tags:
+ *       - Notificações
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -17,13 +28,10 @@ const router = Router();
  *             properties:
  *               to:
  *                 type: string
- *                 description: Endereço de e-mail do destinatário
  *               message:
  *                 type: string
- *                 description: Mensagem do e-mail
  *               file:
  *                 type: string
- *                 description: Nome do arquivo (obrigatório)
  *             required:
  *               - to
  *               - message
@@ -34,13 +42,17 @@ const router = Router();
  *       500:
  *         description: Erro ao enviar e-mail
  */
-router.post('/notify/success', sendSuccessNotification);
+router.post('/notify/success', authMiddleware, sendSuccessNotification)
 
 /**
  * @swagger
  * /api/notify/error:
  *   post:
  *     summary: Envia notificação de erro por e-mail
+ *     tags:
+ *       - Notificações
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -50,13 +62,10 @@ router.post('/notify/success', sendSuccessNotification);
  *             properties:
  *               to:
  *                 type: string
- *                 description: Endereço de e-mail do destinatário
  *               message:
  *                 type: string
- *                 description: Mensagem do e-mail
  *               file:
  *                 type: string
- *                 description: Nome do arquivo (obrigatório)
  *             required:
  *               - to
  *               - message
@@ -67,13 +76,15 @@ router.post('/notify/success', sendSuccessNotification);
  *       500:
  *         description: Erro ao enviar e-mail
  */
-router.post('/notify/error', sendErrorNotification);
+router.post('/notify/error', authMiddleware, sendErrorNotification)
 
 /**
  * @swagger
  * /api/notifications/health:
  *   get:
  *     summary: Health check do serviço
+ *     tags:
+ *       - Notificações
  *     responses:
  *       200:
  *         description: Serviço funcionando
@@ -92,7 +103,7 @@ router.get('/notifications/health', (req, res) => {
     status: 'healthy',
     service: 'notification-service',
     timestamp: new Date().toISOString()
-  });
-});
+  })
+})
 
-export default router;
+export default router
