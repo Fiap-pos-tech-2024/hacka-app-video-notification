@@ -9,6 +9,8 @@ const router = Router()
  * /api/notify/success:
  *   post:
  *     summary: Envia notificação de sucesso por e-mail
+ *     tags:
+ *       - Notificações
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -41,6 +43,8 @@ router.post('/notify/success', authMiddleware, sendSuccessNotification)
  * /api/notify/error:
  *   post:
  *     summary: Envia notificação de erro por e-mail
+ *     tags:
+ *       - Notificações
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -73,6 +77,8 @@ router.post('/notify/error', authMiddleware, sendErrorNotification)
  * /api/notifications/health:
  *   get:
  *     summary: Health check do serviço
+ *     tags:
+ *       - Notificações
  *     responses:
  *       200:
  *         description: Serviço funcionando
