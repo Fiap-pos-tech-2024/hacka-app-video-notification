@@ -9,6 +9,8 @@ const router = Router()
  * /api/notify/success:
  *   post:
  *     summary: Envia notificação de sucesso por e-mail
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -18,13 +20,10 @@ const router = Router()
  *             properties:
  *               to:
  *                 type: string
- *                 description: Endereço de e-mail do destinatário
  *               message:
  *                 type: string
- *                 description: Mensagem do e-mail
  *               file:
  *                 type: string
- *                 description: Nome do arquivo (obrigatório)
  *             required:
  *               - to
  *               - message
@@ -42,6 +41,8 @@ router.post('/notify/success', authMiddleware, sendSuccessNotification)
  * /api/notify/error:
  *   post:
  *     summary: Envia notificação de erro por e-mail
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -51,13 +52,10 @@ router.post('/notify/success', authMiddleware, sendSuccessNotification)
  *             properties:
  *               to:
  *                 type: string
- *                 description: Endereço de e-mail do destinatário
  *               message:
  *                 type: string
- *                 description: Mensagem do e-mail
  *               file:
  *                 type: string
- *                 description: Nome do arquivo (obrigatório)
  *             required:
  *               - to
  *               - message
