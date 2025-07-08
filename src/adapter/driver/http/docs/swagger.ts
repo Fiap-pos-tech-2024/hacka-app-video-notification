@@ -1,5 +1,8 @@
 import swaggerJSDoc from 'swagger-jsdoc';
 
+const albDns = process.env.ALB_DNS || 'localhost';
+const port = process.env.PORT || '3001';
+
 const options = {
   definition: {
     openapi: '3.0.0',
@@ -7,8 +10,17 @@ const options = {
       title: 'Notification API',
       version: '1.0.0',
     },
+    servers: [
+      {
+        url: `http://${albDns}`,
+        description: 'Production ALB',
+      },
+      {
+        url: `http://localhost:${port}`,
+        description: 'Local development',
+      }
+    ],
   },
-  // Em produção, apontar para código compilado em dist
   apis: ['./dist/adapter/driver/http/routes/*.js'],
 };
 

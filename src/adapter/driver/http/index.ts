@@ -22,8 +22,11 @@ app.get('/notification-metrics', async (_req, res) => {
   }
 });
 
-app.listen(3001, () => {
-  console.log('Notification service running on port 3001');
-  console.log('Docs: http://localhost:3001/notification-docs');
-  console.log('Metrics: http://localhost:3001/notification-metrics');
+const PORT = process.env.PORT || 3001;
+const ALB_DNS = process.env.ALB_DNS || 'localhost';
+
+app.listen(PORT, () => {
+  console.log(`Notification service running on port ${PORT}`);
+  console.log(`Docs: http://${ALB_DNS}/notification-docs`);
+  console.log(`Metrics: http://${ALB_DNS}/notification-metrics`);
 });
