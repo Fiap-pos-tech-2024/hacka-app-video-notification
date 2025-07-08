@@ -1,7 +1,7 @@
 import swaggerJSDoc from 'swagger-jsdoc'
 
-const albDns = process.env.ALB_DNS || 'localhost'
-const port = process.env.PORT || '3001'
+const albDns = process.env.ALB_DNS ?? 'localhost'
+const port = process.env.PORT ?? '3001'
 
 const options = {
   definition: {
