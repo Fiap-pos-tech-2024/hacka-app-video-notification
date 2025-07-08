@@ -1,63 +1,48 @@
-import axios, { AxiosError, AxiosInstance, AxiosRequestConfig } from 'axios'
-import { User } from '@core/domain/entities/user'
+import axios from 'axios';
 import {
   ForbiddenException,
   UnauthorizedException,
   NoMappedAuthException
-} from '@core/domain/exceptions/auth-exceptions'
+} from '@core/domain/exceptions/auth-exceptions';
+
+export interface AuthUser {
+  id: string;
+  nome: string;
+  email: string;
+}
 
 interface AuthResponse {
-  user: {
-    id: string
-    nome: string
-    email: string
-  }
-  message: string
+  user: AuthUser;
+  message: string;
 }
 
 export class AuthService {
-  private readonly baseUrl: string
-  private readonly apiClient: AxiosInstance
+  private readonly baseUrl: string;
 
   constructor() {
-    this.baseUrl = process.env.BASE_PATH_AUTH ?? 'http://localhost:3000/auth'
-    this.apiClient = axios.create({
-      baseURL: this.baseUrl,
-      timeout: 5000
-    })
+    this.baseUrl = process.env.BASE_PATH_AUTH || 'http://localhost:3000/api/auth';
   }
 
-  async validateToken(token: string): Promise<User | null> {
+  async validateToken(token: string): Promise<AuthUser> {
     try {
-      const config: AxiosRequestConfig = {
+      const response = await axios.get<AuthResponse>(`${this.baseUrl}/validate`, {
         headers: {
-          Authorization: `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
+        timeout: 5000,
+      });
+
+      return response.data.user;
+    } catch (error: any) {
+      const status = error.response?.status;
+
+      if (status === 401) {
+        throw new UnauthorizedException('Invalid or expired token');
+      } else if (status === 403) {
+        throw new ForbiddenException('User does not have permission');
+      } else {
+        throw new NoMappedAuthException('Unexpected error validating token');
       }
-
-      const response = await this.apiClient.get<AuthResponse>('/validate', config)
-
-      if (response.data) {
-        const { user } = response.data
-        return new User({ id: user.id, nome: user.nome, email: user.email })
-      }
-
-      return null
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        const axiosError = error as AxiosError
-
-        switch (axiosError.response?.status) {
-          case 401:
-            throw new UnauthorizedException('Invalid or expired token')
-          case 403:
-            throw new ForbiddenException('User does not have permission')
-          default:
-            throw new NoMappedAuthException('Unexpected error validating token')
-        }
-      }
-
-      throw error
     }
   }
 }

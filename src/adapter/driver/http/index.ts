@@ -1,3 +1,4 @@
+import 'module-alias/register';
 import 'dotenv/config';
 import express from 'express';
 import notificationRoutes from './routes/notification.route';
@@ -28,5 +29,4 @@ const ALB_DNS = process.env.ALB_DNS || 'localhost';
 app.listen(PORT, () => {
   console.log(`Notification service running on port ${PORT}`);
   console.log(`Docs: http://${ALB_DNS}/notification-docs`);
-  console.log(`Metrics: http://${ALB_DNS}/notification-metrics`);
 });

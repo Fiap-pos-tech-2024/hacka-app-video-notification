@@ -16,6 +16,7 @@ export async function authMiddleware(req: Request, res: Response, next: NextFunc
   try {
     const user = await authService.validateToken(token)
     if (!user) throw new UnauthorizedException()
+
     req.user = user
     next()
   } catch (err: any) {

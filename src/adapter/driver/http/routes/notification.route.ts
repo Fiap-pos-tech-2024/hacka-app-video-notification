@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import { sendSuccessNotification, sendErrorNotification } from '../presenters/notification.presenter'
-import { authMiddleware } from '../driver/http/middlewares/authMiddleware'
+import { authMiddleware } from '../middlewares/authMiddleware'
 
 const router = Router()
 
