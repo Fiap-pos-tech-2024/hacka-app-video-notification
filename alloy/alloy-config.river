@@ -2,6 +2,12 @@ discovery.relabel "static_targets" {
   targets = [{
     __address__ = env("NOTIFICATION_SERVICE_ALB_DNS") + ":80",
   }]
+
+  rule {
+    source_labels = []
+    target_label  = "job"
+    replacement   = "notification-service"
+  }
 }
 
 prometheus.scrape "notification_service" {
