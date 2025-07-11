@@ -23,7 +23,7 @@ prometheus.scrape "notification_service" {
 
 prometheus.remote_write "to_grafana_notification" {
   endpoint {
-    name = "hosted-prometheus"
+    name = "hosted-prometheus_notification"
     url  = env("GRAFANA_REMOTE_WRITE_URL")
 
     basic_auth {
