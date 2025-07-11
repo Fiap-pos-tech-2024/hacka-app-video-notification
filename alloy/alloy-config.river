@@ -25,7 +25,7 @@ logging {
   level = "debug"
 }
 
-prometheus.remote_write "metrics_hosted_prometheus" {
+prometheus.remote_write "to_grafana_notification" {
   endpoint {
     name = "hosted-prometheus"
     url  = env("GRAFANA_REMOTE_WRITE_URL")
