@@ -1,4 +1,4 @@
-discovery.relabel "static_targets" {
+discovery.relabel "static_targets_notification" {
   targets = [{
     __address__ = env("NOTIFICATION_SERVICE_ALB_DNS") + ":80",
   }]
@@ -16,9 +16,9 @@ prometheus.scrape "notification_service" {
   scrape_interval = "15s"
   scrape_timeout  = "10s"
 
-  targets = discovery.relabel.static_targets.output
+  targets = discovery.relabel.static_targets_notification.output
 
-  forward_to = [prometheus.remote_write.to_grafana_notification]
+  forward_to = [prometheus.remote_write.to_grafana_notification.receiver]
 }
 
 prometheus.remote_write "to_grafana_notification" {
