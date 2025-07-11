@@ -1,6 +1,6 @@
 discovery.relabel "static_targets_notification" {
   targets = [{
-    __address__ = env("NOTIFICATION_SERVICE_ALB_DNS") + ":80",
+    __address__ = env("SHARED_ALB_DNS") + ":80",
   }]
 
   rule {
